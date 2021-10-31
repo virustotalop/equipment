@@ -24,13 +24,13 @@ public class CaffeineDebouncer<K> implements Debouncer<K> {
 
 
     @Override
-    public boolean wouldDebounced(K key) {
+    public boolean wouldDebounce(K key) {
         return this.cache.getIfPresent(key) != null;
     }
 
     @Override
     public boolean debounce(K key) {
-        if(this.wouldDebounced(key)) {
+        if(this.wouldDebounce(key)) {
             return true;
         }
         this.cache.put(key, Instant.now().toEpochMilli());
