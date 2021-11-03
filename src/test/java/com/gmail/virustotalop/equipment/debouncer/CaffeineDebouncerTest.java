@@ -20,7 +20,7 @@ public class CaffeineDebouncerTest {
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        assertFalse(debouncer.wouldDebounce(uuid));
+        assertFalse(debouncer.containsKey(uuid));
     }
 
     @Test
@@ -36,12 +36,12 @@ public class CaffeineDebouncerTest {
         Debouncer<UUID> debouncer = new CaffeineDebouncer<>(1, TimeUnit.SECONDS);
         UUID uuid = UUID.randomUUID();
         assertFalse(debouncer.debounce(uuid));
-        assertTrue(debouncer.wouldDebounce(uuid));
+        assertTrue(debouncer.containsKey(uuid));
     }
 
     @Test
     public void testIsDebouncedFalse() {
         Debouncer<UUID> debouncer = new CaffeineDebouncer<>(1, TimeUnit.SECONDS);
-        assertFalse(debouncer.wouldDebounce(UUID.randomUUID()));
+        assertFalse(debouncer.containsKey(UUID.randomUUID()));
     }
 }
