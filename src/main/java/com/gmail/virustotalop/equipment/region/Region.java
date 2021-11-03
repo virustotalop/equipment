@@ -16,14 +16,23 @@ public abstract class Region {
         this.worldName = world.getName();
     }
 
+    /**
+     * @return the name of the region
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return the name of the world that the region is located in
+     */
     public String getWorldName() {
         return this.worldName;
     }
 
+    /**
+     * @return the world that the region is located in
+     */
     public World getWorld() {
         return Bukkit.getServer().getWorld(this.worldName);
     }
@@ -42,6 +51,10 @@ public abstract class Region {
         return Objects.hash(this.name, this.worldName);
     }
 
+    /**
+     * @param location Location to check if the key would debounce
+     * @return if the location is within the region
+     */
     public abstract boolean isWithin(Location location);
 
 }
