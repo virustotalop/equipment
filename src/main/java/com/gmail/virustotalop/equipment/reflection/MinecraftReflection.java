@@ -13,8 +13,7 @@ public final class MinecraftReflection {
 
     private static String version() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
-        String version = packageName.substring(packageName.lastIndexOf('.') + 1);
-        return version;
+        return packageName.substring(packageName.lastIndexOf('.') + 1);
     }
 
     private final ClassCache classCache;
@@ -28,15 +27,15 @@ public final class MinecraftReflection {
     }
 
     public Class<?> getNMSClass(String nmsClassName, String... optPackages) {
-        String nmsPackage = "";
+        StringBuilder nmsPackage = new StringBuilder();
         for(int i = 0; i < optPackages.length; i++) {
-            nmsPackage += optPackages[i];
+            nmsPackage.append(optPackages[i]);
             if(i != optPackages.length - 1) {
-                nmsPackage += ".";
+                nmsPackage.append(".");
             }
         }
         String basePackage = "net.minecraft";
-        String legacyClassName = basePackage + ".server." + VERSION + "." + nmsClassName;;
+        String legacyClassName = basePackage + ".server." + VERSION + "." + nmsClassName;
         String modernClassName = basePackage;
         if(nmsPackage.length() > 0) {
             modernClassName += ".";
@@ -58,17 +57,17 @@ public final class MinecraftReflection {
     }
 
     public Class<?> getCraftClass(String className, String... optPackages) {
-        String craftClassName = "org.bukkit.craftbukkit." + VERSION;
+        StringBuilder craftClassName = new StringBuilder("org.bukkit.craftbukkit." + VERSION);
         if(optPackages.length > 0) {
-            craftClassName += ".";
+            craftClassName.append(".");
             for(int i = 0; i < optPackages.length; i++) {
-                craftClassName += optPackages[i];
+                craftClassName.append(optPackages[i]);
                 if(i != optPackages.length - 1) {
-                    craftClassName += ".";
+                    craftClassName.append(".");
                 }
             }
         }
-        craftClassName += "." + className;
-        return this.classCache.lookup(craftClassName);
+        craftClassName.append(".").append(className);
+        return this.classCache.lookup(craftClassName.toString());
     }
 }
