@@ -1,6 +1,7 @@
 package com.gmail.virustotalop.equipment.mock;
 
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_8_R3.MockServer;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Field;

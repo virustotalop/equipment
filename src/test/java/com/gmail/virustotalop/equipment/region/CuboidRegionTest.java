@@ -1,7 +1,7 @@
 package com.gmail.virustotalop.equipment.region;
 
 import com.gmail.virustotalop.equipment.mock.MockFactory;
-import com.gmail.virustotalop.equipment.mock.MockWorld;
+import org.bukkit.craftbukkit.v1_8_R3.MockWorld;
 import org.bukkit.Location;
 import org.junit.jupiter.api.Test;
 

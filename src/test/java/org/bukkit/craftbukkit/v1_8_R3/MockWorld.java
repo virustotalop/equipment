@@ -1,4 +1,4 @@
-package com.gmail.virustotalop.equipment.mock;
+package org.bukkit.craftbukkit.v1_8_R3;
 
 import org.bukkit.World;
 
