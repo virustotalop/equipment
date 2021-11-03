@@ -15,7 +15,7 @@ public class CaffeineClassCacheTest {
 
     @Test
     public void testInCache() {
-        String testClassName = "net.minecraft.v1_8_R3.TestNMSLegacy";
+        String testClassName = "net.minecraft.server.v1_8_R3.TestNMSLegacy";
         ClassCache cache = new CaffeineClassCache(10, TimeUnit.MINUTES);
         Class<?> testClazz = cache.lookup(testClassName);
         assertNotNull(testClazz);

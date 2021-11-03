@@ -4,7 +4,7 @@ import com.gmail.virustotalop.equipment.mock.MockFactory;
 import net.minecraft.TestNMSModern;
 import net.minecraft.test.PackagedNMSModern;
 import net.minecraft.test.child.ChildPackagedNMSModern;
-import net.minecraft.v1_8_R3.TestNMSLegacy;
+import net.minecraft.server.v1_8_R3.TestNMSLegacy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

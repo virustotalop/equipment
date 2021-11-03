@@ -36,7 +36,7 @@ public final class MinecraftReflection {
             }
         }
         String basePackage = "net.minecraft";
-        String legacyClassName = basePackage + "." + VERSION + "." + nmsClassName;;
+        String legacyClassName = basePackage + ".server." + VERSION + "." + nmsClassName;;
         String modernClassName = basePackage;
         if(nmsPackage.length() > 0) {
             modernClassName += ".";
