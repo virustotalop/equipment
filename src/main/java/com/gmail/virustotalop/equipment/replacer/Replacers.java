@@ -4,6 +4,6 @@ import org.bukkit.entity.Player;
 
 public interface Replacers {
 
-    String replace(Player populateIn, String replaceIn);
+    String replace(Player player, String replaceIn);
 
 }
