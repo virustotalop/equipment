@@ -2,18 +2,22 @@ package com.gmail.virustotalop.equipment.reflection;
 
 import com.gmail.virustotalop.equipment.ClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
+import org.bukkit.Bukkit;
 
 import java.util.concurrent.TimeUnit;
 
 public final class MinecraftReflection {
 
-    private static final String VERSION = version();
+    public static final String VERSION = version();
 
     private static String version() {
-        //TODO - find version
-        return null;
+        if(Bukkit.getServer() == null) {
+            return null;
+        }
+        String packageName = Bukkit.getServer().getClass().getPackage().getName();
+        String version = packageName.substring(packageName.lastIndexOf('.') + 1);
+        return version;
     }
-
 
 
     private final ClassCache classCache;
