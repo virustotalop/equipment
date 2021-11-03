@@ -30,9 +30,30 @@ public final class MinecraftReflection {
         this.classCache = classCache;
     }
 
-    public Class<?> getNMSClass(String className, String... packages) {
-        //TODO
-        return null;
+    public Class<?> getNMSClass(String nmsClassName, String... optPackages) {
+        String nmsPackage = "";
+        for(int i = 0; i < optPackages.length; i++) {
+            nmsPackage += optPackages[i];
+            if(i != optPackages.length - 1) {
+                nmsPackage += ".";
+            }
+        }
+        String basePackage = "net.minecraft";
+        String legacyClassName = basePackage + "." + VERSION + "." + nmsClassName;;
+        String modernClassName = basePackage;
+        if(nmsPackage.length() > 0) {
+            modernClassName += ".";
+        }
+        modernClassName += nmsPackage + "." + nmsClassName;
+        Class<?> legacyClass = this.classCache.lookup(legacyClassName);
+        if(legacyClass == null) {
+            return this.classCache.lookup(modernClassName);
+        }
+        return legacyClass;
+    }
+
+    public Class<?> getNMSClass(String className) {
+        return this.getNMSClass(className, new String[0]);
     }
 
     public Class<?> getCraftClass(String className) {
@@ -40,7 +61,7 @@ public final class MinecraftReflection {
         return null;
     }
 
-    public Class<?> getCraftClass(String className, String packageName) {
+    public Class<?> getCraftClass(String className, String... packages) {
         //TODO
         return null;
     }
