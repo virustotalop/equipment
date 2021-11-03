@@ -1,4 +1,4 @@
-package com.gmail.virustotalop.equipment;
+package com.gmail.virustotalop.equipment.debouncer;
 
 public interface Debouncer<K> {
 

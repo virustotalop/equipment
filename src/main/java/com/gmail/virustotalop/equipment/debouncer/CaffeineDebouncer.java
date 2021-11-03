@@ -2,7 +2,6 @@ package com.gmail.virustotalop.equipment.debouncer;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.gmail.virustotalop.equipment.Debouncer;
 
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;

@@ -1,4 +1,4 @@
-package com.gmail.virustotalop.equipment;
+package com.gmail.virustotalop.equipment.reflection.cache;
 
 import java.util.Map;
 import java.util.Optional;

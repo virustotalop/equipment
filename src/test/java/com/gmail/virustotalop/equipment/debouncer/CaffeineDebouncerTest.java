@@ -1,6 +1,5 @@
 package com.gmail.virustotalop.equipment.debouncer;
 
-import com.gmail.virustotalop.equipment.Debouncer;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

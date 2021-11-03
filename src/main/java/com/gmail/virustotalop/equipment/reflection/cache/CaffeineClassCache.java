@@ -2,7 +2,6 @@ package com.gmail.virustotalop.equipment.reflection.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.gmail.virustotalop.equipment.ClassCache;
 
 import java.util.Map;
 import java.util.Optional;

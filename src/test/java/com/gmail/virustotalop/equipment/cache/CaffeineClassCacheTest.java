@@ -1,6 +1,6 @@
 package com.gmail.virustotalop.equipment.cache;
 
-import com.gmail.virustotalop.equipment.ClassCache;
+import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
 import org.junit.jupiter.api.Test;
 
