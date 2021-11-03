@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public final class MinecraftReflection {
 
+    private static final String[] EMPTY_ARR = new String[0];
     public static final String VERSION = version();
 
     private static String version() {
@@ -15,7 +16,6 @@ public final class MinecraftReflection {
         String version = packageName.substring(packageName.lastIndexOf('.') + 1);
         return version;
     }
-
 
     private final ClassCache classCache;
 
@@ -50,16 +50,26 @@ public final class MinecraftReflection {
     }
 
     public Class<?> getNMSClass(String className) {
-        return this.getNMSClass(className, new String[0]);
+        return this.getNMSClass(className, EMPTY_ARR);
     }
 
     public Class<?> getCraftClass(String className) {
-        //TODO
-        return null;
+        return this.getCraftClass(className, EMPTY_ARR);
     }
 
-    public Class<?> getCraftClass(String className, String... packages) {
-        //TODO
-        return null;
+    public Class<?> getCraftClass(String className, String... optPackages) {
+        String craftClassName = "org.bukkit.craftbukkit." + VERSION;
+        if(optPackages.length > 0) {
+            craftClassName += ".";
+            for(int i = 0; i < optPackages.length; i++) {
+                craftClassName += optPackages[i];
+                if(i != optPackages.length - 1) {
+                    craftClassName += ".";
+                }
+            }
+        }
+        craftClassName += "." + className;
+        System.out.println(craftClassName);
+        return this.classCache.lookup(craftClassName);
     }
 }

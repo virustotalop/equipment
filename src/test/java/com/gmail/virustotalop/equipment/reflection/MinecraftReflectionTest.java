@@ -5,6 +5,9 @@ import net.minecraft.TestNMSModern;
 import net.minecraft.test.PackagedNMSModern;
 import net.minecraft.test.child.ChildPackagedNMSModern;
 import net.minecraft.server.v1_8_R3.TestNMSLegacy;
+import org.bukkit.craftbukkit.v1_8_R3.TestCraft;
+import org.bukkit.craftbukkit.v1_8_R3.test.TestCraftPackaged;
+import org.bukkit.craftbukkit.v1_8_R3.test.child.ChildTestCraftPackaged;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +15,13 @@ import static junit.framework.Assert.assertEquals;
 
 public class MinecraftReflectionTest {
 
+    private MinecraftReflection reflect;
+
     @BeforeEach
     public void setup() {
         MockFactory factory = new MockFactory();
         factory.createServer();
+        this.reflect = new MinecraftReflection();
     }
 
     @Test
@@ -25,28 +31,41 @@ public class MinecraftReflectionTest {
 
     @Test
     public void lookupNmsClassLegacy() {
-        MinecraftReflection reflect = new MinecraftReflection();
-        assertEquals(TestNMSLegacy.class, reflect.getNMSClass("TestNMSLegacy"));
+        assertEquals(TestNMSLegacy.class, this.reflect.getNMSClass("TestNMSLegacy"));
     }
 
     @Test
     public void lookupNmsClassModern() {
-        MinecraftReflection reflect = new MinecraftReflection();
-        assertEquals(TestNMSModern.class, reflect.getNMSClass("TestNMSModern"));
+        assertEquals(TestNMSModern.class, this.reflect.getNMSClass("TestNMSModern"));
     }
 
 
     @Test
     public void lookupNmsClassModernPackaged() {
-        MinecraftReflection reflect = new MinecraftReflection();
-        assertEquals(PackagedNMSModern.class, reflect.getNMSClass("PackagedNMSModern", "test"));
+        assertEquals(PackagedNMSModern.class, this.reflect.getNMSClass("PackagedNMSModern", "test"));
     }
 
     @Test
     public void lookupNmsClassModernPackagedChild() {
-        MinecraftReflection reflect = new MinecraftReflection();
-        assertEquals(ChildPackagedNMSModern.class, reflect.getNMSClass("ChildPackagedNMSModern",
+        assertEquals(ChildPackagedNMSModern.class, this.reflect.getNMSClass("ChildPackagedNMSModern",
                 "test",
                 "child"));
+    }
+
+    @Test
+    public void lookupCraftClassNoPackage() {
+        assertEquals(TestCraft.class, this.reflect.getCraftClass("TestCraft"));
+    }
+
+    @Test
+    public void lookupCraftClassOnePackageDeep() {
+        assertEquals(TestCraftPackaged.class, this.reflect.getCraftClass("TestCraftPackaged",
+                "test"));
+    }
+
+    @Test
+    public void lookupCraftClassTwoPackagesDeep() {
+        assertEquals(ChildTestCraftPackaged.class, this.reflect.getCraftClass("ChildTestCraftPackaged",
+                "test", "child"));
     }
 }
