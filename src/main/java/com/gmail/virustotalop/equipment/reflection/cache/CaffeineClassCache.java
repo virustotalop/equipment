@@ -12,14 +12,14 @@ public class CaffeineClassCache implements ClassCache {
 
     private final Cache<String, Optional<Class<?>>> cache;
 
-    public CaffeineClassCache(int debounceTime, TimeUnit timeUnit) {
-        this(debounceTime, timeUnit, Long.MAX_VALUE);
+    public CaffeineClassCache(int cacheTimeout, TimeUnit timeUnit) {
+        this(cacheTimeout, timeUnit, Long.MAX_VALUE);
     }
 
-    public CaffeineClassCache(int debounceTime, TimeUnit timeUnit, Long maxCacheSize) {
+    public CaffeineClassCache(int cacheTimeout, TimeUnit timeUnit, Long maxCacheSize) {
         this.cache = Caffeine.newBuilder()
                 .maximumSize(maxCacheSize)
-                .expireAfterWrite(debounceTime, timeUnit)
+                .expireAfterWrite(cacheTimeout, timeUnit)
                 .build();
     }
 
