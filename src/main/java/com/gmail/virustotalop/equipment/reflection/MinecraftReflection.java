@@ -69,7 +69,6 @@ public final class MinecraftReflection {
             }
         }
         craftClassName += "." + className;
-        System.out.println(craftClassName);
         return this.classCache.lookup(craftClassName);
     }
 }
