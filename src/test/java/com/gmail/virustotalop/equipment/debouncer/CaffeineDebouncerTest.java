@@ -25,6 +25,14 @@ public class CaffeineDebouncerTest {
     }
 
     @Test
+    public void testDoesDebounce() {
+        Debouncer<UUID> debouncer = new CaffeineDebouncer<>(1, TimeUnit.SECONDS);
+        UUID uuid = UUID.randomUUID();
+        assertFalse(debouncer.debounce(uuid));
+        assertTrue(debouncer.debounce(uuid));
+    }
+
+    @Test
     public void testIsDebouncedTrue() {
         Debouncer<UUID> debouncer = new CaffeineDebouncer<>(1, TimeUnit.SECONDS);
         UUID uuid = UUID.randomUUID();
