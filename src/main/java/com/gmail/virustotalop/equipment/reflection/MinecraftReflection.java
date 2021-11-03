@@ -11,9 +11,6 @@ public final class MinecraftReflection {
     public static final String VERSION = version();
 
     private static String version() {
-        if(Bukkit.getServer() == null) {
-            return null;
-        }
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
         String version = packageName.substring(packageName.lastIndexOf('.') + 1);
         return version;
