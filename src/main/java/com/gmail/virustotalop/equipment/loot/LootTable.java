@@ -21,6 +21,10 @@ public class LootTable {
     }
 
     public boolean roll(int guaranteed) {
+        return this.roll(guaranteed, 0);
+    }
+
+    private boolean roll(int guaranteed, int currentRolls) {
         //TODO - implement
         return false;
     }
