@@ -16,7 +16,7 @@ public class CommandLoot implements Loot<Player> {
 
     @Override
     public void populate(Player populate) {
-        String dispatchCommand = this.replacers.replace(populate, command);
-        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), this.command);
+        String replacedCommand = this.replacers.replace(populate, command);
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), replacedCommand);
     }
 }
