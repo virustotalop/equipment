@@ -5,10 +5,16 @@ plugins {
 group 'com.gmail.virustotalop'
 version '1.0.0-SNAPSHOT'
 
+
 repositories {
     mavenCentral()
     maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"}
     maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 test {
