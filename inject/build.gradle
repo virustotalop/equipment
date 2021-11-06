@@ -1,3 +1,4 @@
 dependencies {
     compileOnly(project(":core"))
+    compileOnly('com.google.inject:guice:5.0.1')
 }
