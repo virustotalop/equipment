@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class MockCraftInventory implements Inventory {
 
-    private Map<Integer, ItemStack> slots = new HashMap<>();
+    private final Map<Integer, ItemStack> slots = new HashMap<>();
 
     @Override
     public int getSize() {
