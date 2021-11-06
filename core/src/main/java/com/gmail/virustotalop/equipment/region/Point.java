@@ -1,10 +1,13 @@
 package com.gmail.virustotalop.equipment.region;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 
 public class Point {
 
-    public static Point create(String coords) {
+    public static @Nullable Point create(@NotNull String coords) {
         if(coords == null) {
             return null;
         } else if(!coords.contains(",")) {

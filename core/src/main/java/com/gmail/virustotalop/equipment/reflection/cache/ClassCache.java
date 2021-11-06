@@ -1,17 +1,22 @@
 package com.gmail.virustotalop.equipment.reflection.cache;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 import java.util.Optional;
 
 public interface ClassCache {
 
-    Map<String, Optional<Class<?>>> cache();
 
-    default Class<?> lookup(String... classes) {
+    @NotNull Map<String, Optional<Class<?>>> cache();
+
+    default @Nullable Class<?> lookup(@NotNull String... classes) {
         return this.lookup(null, classes);
     }
 
-    default Class<?> lookup(ClassLoader classLoader, String... classes) {
+
+    default @Nullable Class<?> lookup(@NotNull ClassLoader classLoader, @NotNull String... classes) {
         for(String clazzName : classes) {
             Optional<Class<?>> clazzOpt = this.cache().get(clazzName);
             if(clazzOpt != null && clazzOpt.isPresent()) {

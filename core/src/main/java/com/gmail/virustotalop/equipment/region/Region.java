@@ -3,6 +3,8 @@ package com.gmail.virustotalop.equipment.region;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -11,7 +13,7 @@ public abstract class Region {
     private final String name;
     private final String worldName;
 
-    public Region(String name, World world) {
+    public Region(@NotNull String name, @NotNull World world) {
         this.name = name;
         this.worldName = world.getName();
     }
@@ -19,21 +21,22 @@ public abstract class Region {
     /**
      * @return the name of the region
      */
-    public String getName() {
+
+    public @NotNull String getName() {
         return this.name;
     }
 
     /**
      * @return the name of the world that the region is located in
      */
-    public String getWorldName() {
+    public @NotNull String getWorldName() {
         return this.worldName;
     }
 
     /**
      * @return the world that the region is located in
      */
-    public World getWorld() {
+    public @Nullable World getWorld() {
         return Bukkit.getServer().getWorld(this.worldName);
     }
 

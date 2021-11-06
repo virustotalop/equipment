@@ -4,5 +4,4 @@ public interface Loot<T> {
 
     void populate(T populate);
 
-
 }

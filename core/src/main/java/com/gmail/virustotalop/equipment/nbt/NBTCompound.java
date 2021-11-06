@@ -2,6 +2,8 @@ package com.gmail.virustotalop.equipment.nbt;
 
 import com.gmail.virustotalop.equipment.reflection.MinecraftReflection;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,14 +34,14 @@ public class NBTCompound {
         }
     }
 
-    public static boolean isCompound(Object compound) {
+    public static boolean isCompound(@NotNull Object compound) {
         if(compound == null) {
             return false;
         }
         return compound.getClass().equals(COMPOUND_CLASS);
     }
 
-    public static boolean fuzzyMatches(NBTCompound compare, NBTCompound compound) {
+    public static boolean fuzzyMatches(@NotNull NBTCompound compare, @NotNull NBTCompound compound) {
         for(String key : compare.getKeys()) {
             Object get = compound.get(key);
             if(get == null) {
@@ -59,23 +61,23 @@ public class NBTCompound {
 
     private final Object inner;
 
-    public NBTCompound(Object compound) {
+    public NBTCompound(@NotNull Object compound) {
         this.inner = isCompound(compound) ? compound : null;
     }
 
-    public NBTCompound(String json) throws Exception {
+    public NBTCompound(@NotNull String json) throws Exception {
         this.inner = this.parseNBTCompoundFromJson(json);
     }
 
-    public NBTCompound(ItemStack itemStack) {
+    public NBTCompound(@NotNull ItemStack itemStack) {
         this.inner = this.retrieveNBTCompoundFromItem(itemStack);
     }
 
-    public Object getNMSCompound() {
+    public @Nullable Object getNMSCompound() {
         return this.inner;
     }
 
-    public Set<String> getKeys() {
+    public @Nullable Set<String> getKeys() {
         try {
             return (Set<String>) getKeys.invoke(this.inner);
         } catch(InvocationTargetException | IllegalAccessException e) {
@@ -84,11 +86,11 @@ public class NBTCompound {
         return null;
     }
 
-    public boolean hasKey(String key) {
+    public boolean hasKey(@NotNull String key) {
         return this.getKeys().contains(key);
     }
 
-    public Object get(String key) {
+    public @Nullable Object get(@NotNull String key) {
         try {
             if(!this.hasKey(key)) {
                 return null;

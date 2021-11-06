@@ -2,6 +2,7 @@ package com.gmail.virustotalop.equipment.reflection.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class CaffeineClassCache implements ClassCache {
     }
 
     @Override
-    public Map<String, Optional<Class<?>>> cache() {
+    public @NotNull Map<String, Optional<Class<?>>> cache() {
         return this.cache.asMap();
     }
 }

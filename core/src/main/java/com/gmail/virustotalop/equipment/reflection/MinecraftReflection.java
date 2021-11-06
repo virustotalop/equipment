@@ -3,6 +3,8 @@ package com.gmail.virustotalop.equipment.reflection;
 import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,11 +24,12 @@ public final class MinecraftReflection {
         this(new CaffeineClassCache(5, TimeUnit.MINUTES));
     }
 
-    public MinecraftReflection(ClassCache classCache) {
+    public MinecraftReflection(@NotNull ClassCache classCache) {
         this.classCache = classCache;
     }
 
-    public Class<?> getNMSClass(String nmsClassName, String... optPackages) {
+
+    public @Nullable Class<?> getNMSClass(@NotNull String nmsClassName, @NotNull String... optPackages) {
         StringBuilder nmsPackage = new StringBuilder();
         for(int i = 0; i < optPackages.length; i++) {
             nmsPackage.append(optPackages[i]);
@@ -48,15 +51,16 @@ public final class MinecraftReflection {
         return legacyClass;
     }
 
-    public Class<?> getNMSClass(String className) {
+
+    public @Nullable Class<?> getNMSClass(@NotNull String className) {
         return this.getNMSClass(className, EMPTY_ARR);
     }
 
-    public Class<?> getCraftClass(String className) {
+    public @Nullable Class<?> getCraftClass(@NotNull String className) {
         return this.getCraftClass(className, EMPTY_ARR);
     }
 
-    public Class<?> getCraftClass(String className, String... optPackages) {
+    public @Nullable Class<?> getCraftClass(@NotNull String className, @NotNull String... optPackages) {
         StringBuilder craftClassName = new StringBuilder("org.bukkit.craftbukkit." + VERSION);
         if(optPackages.length > 0) {
             craftClassName.append(".");

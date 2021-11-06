@@ -2,6 +2,7 @@ package com.gmail.virustotalop.equipment.region;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
 
 public class CuboidRegion extends Region {
     
@@ -12,7 +13,7 @@ public class CuboidRegion extends Region {
     private final int maxY;
     private final int maxZ;
 
-    public CuboidRegion(String name, World world, Point min, Point max) {
+    public CuboidRegion(@NotNull String name, @NotNull World world, @NotNull Point min, @NotNull Point max) {
         super(name, world);
         this.maxX = Math.max(min.getX(), max.getX());
         this.maxY = Math.max(min.getY(), max.getY());
@@ -23,7 +24,7 @@ public class CuboidRegion extends Region {
     }
 
     @Override
-    public boolean isWithin(Location location) {
+    public boolean isWithin(@NotNull Location location) {
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();

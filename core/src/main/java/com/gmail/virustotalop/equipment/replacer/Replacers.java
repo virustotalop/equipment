@@ -1,9 +1,10 @@
 package com.gmail.virustotalop.equipment.replacer;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public interface Replacers {
 
-    String replace(Player player, String replaceIn);
+    @NotNull String replace(@NotNull Player player, @NotNull String replaceIn);
 
 }

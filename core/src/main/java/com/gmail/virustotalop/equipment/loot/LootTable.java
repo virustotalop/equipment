@@ -1,5 +1,7 @@
 package com.gmail.virustotalop.equipment.loot;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 public class LootTable {
@@ -7,11 +9,11 @@ public class LootTable {
     private final Map<Loot, Integer> table;
     private final int scale;
 
-    public LootTable(Map<Loot, Integer> table) {
+    public LootTable(@NotNull Map<Loot, Integer> table) {
         this(table, 100);
     }
 
-    public LootTable(Map<Loot, Integer> table, int scale) {
+    public LootTable(@NotNull Map<Loot, Integer> table, int scale) {
         this.table = table;
         this.scale = scale;
     }

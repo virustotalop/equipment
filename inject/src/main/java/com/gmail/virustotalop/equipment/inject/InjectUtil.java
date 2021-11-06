@@ -1,13 +1,16 @@
 package com.gmail.virustotalop.equipment.inject;
 
 import com.google.inject.Injector;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiStatus.NonExtendable
 public final class InjectUtil {
 
-    public static <T> List<T> collect(Class<T> superClazz, Injector injector) {
+    public static <T> List<T> collect(@NotNull Class<T> superClazz, @NotNull Injector injector) {
         List<T> bindings = new ArrayList<>();
         injector.getAllBindings().values().forEach(binding -> {
             Class<?> bindingClazz = binding.getKey().getTypeLiteral().getRawType();

@@ -1,11 +1,12 @@
 package com.gmail.virustotalop.equipment.replacer;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class DefaultReplacers implements Replacers {
 
     @Override
-    public String replace(Player player, String replaceIn) {
+    public @NotNull String replace(@NotNull Player player, @NotNull String replaceIn) {
         return replaceIn.replace("%player%", player.getName());
     }
 }
