@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class CaffeineClassCacheTest {
 
@@ -33,10 +33,12 @@ public class CaffeineClassCacheTest {
 
     @Test
     public void testCached() {
-        String testClassName = "net.minecraft.v1_8_R3.Test";
+        String testClassName = "net.minecraft.server.v1_8_R3.TestNMSLegacy";
         ClassCache cache = new CaffeineClassCache(10, TimeUnit.MINUTES);
         Class<?> testClazz = cache.lookup(testClassName);
         Class<?> cachedTestClazz = cache.lookup(testClassName);
+        assertNotNull(testClazz);
+        assertNotNull(cachedTestClazz);
         assertEquals(testClazz, cachedTestClazz);
     }
 
