@@ -16,7 +16,7 @@ public class InventoryLootTest {
         MockFactory factory = new MockFactory();
         Inventory inventory = factory.mock(MockCraftInventory.class);
         ItemStack dirt = new ItemStack(Material.DIRT);
-        Loot loot = new InventoryLoot(dirt);
+        Loot<Inventory> loot = new InventoryLoot(dirt);
         loot.populate(inventory);
         assertEquals(dirt, inventory.getContents()[0]);
     }
