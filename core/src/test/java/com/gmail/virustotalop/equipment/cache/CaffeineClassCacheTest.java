@@ -39,4 +39,13 @@ public class CaffeineClassCacheTest {
         Class<?> cachedTestClazz = cache.lookup(testClassName);
         assertEquals(testClazz, cachedTestClazz);
     }
+
+    @Test
+    public void testWithSpecifiedClassLoader() {
+        String testClassName = "net.minecraft.server.v1_8_R3.TestNMSLegacy";
+        ClassCache cache = new CaffeineClassCache(10, TimeUnit.MINUTES);
+        Class<?> testClazz = cache.lookup(CaffeineClassCache.class.getClassLoader(), testClassName);
+        assertNotNull(testClazz);
+        assertEquals(cache.cache().get(testClassName).get(), testClazz);
+    }
 }
