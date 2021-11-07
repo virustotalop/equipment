@@ -7,6 +7,8 @@ public class DefaultReplacers implements Replacers {
 
     @Override
     public @NotNull String replace(@NotNull Player player, @NotNull String replaceIn) {
-        return replaceIn.replace("%player%", player.getName());
+        return replaceIn
+                .replace("%player%", player.getName())
+                .replace("%uuid%", player.getUniqueId().toString());
     }
 }
