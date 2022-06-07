@@ -21,5 +21,14 @@ public class WeightedLootTableTest {
         assertEquals(1, rolled.size());
     }
 
-
+    @Test
+    public void testMultipleRolls() {
+        String command = "test";
+        CommandLoot loot = new CommandLoot(command);
+        Map<CommandLoot, Integer> lootMap = new HashMap<>();
+        lootMap.put(loot, 100);
+        LootTable<CommandLoot> table = new WeightedLootTable<>(lootMap);
+        Collection<CommandLoot> rolled = table.roll(2);
+        assertEquals(2, rolled.size());
+    }
 }
