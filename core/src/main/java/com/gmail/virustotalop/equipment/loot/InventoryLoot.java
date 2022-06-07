@@ -13,7 +13,7 @@ public class InventoryLoot implements Loot<Inventory> {
     }
 
     @Override
-    public void populate(@NotNull Inventory populate) {
-        populate.addItem(this.itemStack);
+    public void populate(@NotNull Inventory toPopulate) {
+        toPopulate.addItem(this.itemStack);
     }
 }
