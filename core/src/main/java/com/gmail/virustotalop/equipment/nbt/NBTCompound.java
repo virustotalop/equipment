@@ -13,27 +13,51 @@ import java.util.Set;
 public class NBTCompound {
 
     private static final MinecraftReflection REFLECT = new BukkitReflection();
+    private static final Class<?> NMS_ITEM_STACK_CLASS = REFLECT.getNMSClass(
+            "ItemStack",
+            "world",
+            "item"
+    );
+    private static final Class<?> CRAFT_ITEM_STACK_CLASS = REFLECT.getCraftClass(
+            "CraftItemStack",
+            "inventory"
+    );
     private static final Class<?> COMPOUND_CLASS = REFLECT.getNMSClass("NBTTagCompound", "nbt");
     private static final Class<?> PARSER_CLASS = REFLECT.getNMSClass("MojangsonParser", "nbt");
+    private static final Class<?> TAG_CLASS = REFLECT.getNMSClass("NBTBase", "nbt");
 
-    private static Method parse;
-    private static Method getKeys;
-    private static Method get;
-
-    static {
-        try {
-            parse = PARSER_CLASS.getDeclaredMethod("parse", String.class);
-            get = COMPOUND_CLASS.getDeclaredMethod("get", String.class);
-            for(Method method : COMPOUND_CLASS.getDeclaredMethods()) {
-                if(method.getReturnType().equals(Set.class)) {
-                    getKeys = method;
-                    break;
-                }
-            }
-        } catch(NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final Method PARSE = REFLECT.getMethodByReturnType(
+            PARSER_CLASS,
+            COMPOUND_CLASS,
+            true
+    );
+    private static final Method GET_KEYS = REFLECT.getMethodByReturnType(
+            COMPOUND_CLASS,
+            Set.class,
+            true
+    );
+    private static final Method GET = REFLECT.getMethodByReturnType(
+            COMPOUND_CLASS,
+            TAG_CLASS,
+            true
+    );
+    private static final Method AS_CRAFT_COPY = REFLECT.getMethodByReturnType(
+            CRAFT_ITEM_STACK_CLASS,
+            CRAFT_ITEM_STACK_CLASS,
+            true,
+            ItemStack.class
+    );
+    private static final Method AS_NMS_COPY = REFLECT.getMethodByReturnType(
+            CRAFT_ITEM_STACK_CLASS,
+            NMS_ITEM_STACK_CLASS,
+            true,
+            ItemStack.class
+    );
+    private static final Method GET_COMPOUND_TAG = REFLECT.getMethodByReturnType(
+            NMS_ITEM_STACK_CLASS,
+            COMPOUND_CLASS,
+            false
+    );
 
     public static boolean isCompound(@NotNull Object compound) {
         if(compound == null) {
@@ -78,45 +102,41 @@ public class NBTCompound {
         return this.inner;
     }
 
-    public @Nullable Set<String> getKeys() {
+    public Set<String> getKeys() {
         try {
-            return (Set<String>) getKeys.invoke(this.inner);
-        } catch(InvocationTargetException | IllegalAccessException e) {
+            return (Set<String>) GET_KEYS.invoke(this.inner);
+        } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public boolean hasKey(@NotNull String key) {
+    public boolean hasKey(String key) {
         return this.getKeys().contains(key);
     }
 
-    public @Nullable Object get(@NotNull String key) {
+    public Object get(String key) {
         try {
-            if(!this.hasKey(key)) {
+            if (!this.hasKey(key)) {
                 return null;
             }
-            return get.invoke(this.inner, key);
-        } catch(IllegalAccessException | InvocationTargetException e) {
+            return GET.invoke(this.inner, key);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
     }
 
     private Object parseNBTCompoundFromJson(String json) throws Exception {
-        return parse.invoke(null, json);
+        return PARSE.invoke(null, json);
     }
 
     private Object retrieveNBTCompoundFromItem(ItemStack itemStack) {
         try {
-            Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + BukkitReflection.VERSION + ".inventory.CraftItemStack");
-            Method asCraftCopy = craftItemStack.getMethod("asCraftCopy", ItemStack.class);
-            Method asNMSCopy = craftItemStack.getMethod("asNMSCopy", ItemStack.class);
-            Object craftCopy = asCraftCopy.invoke(null, itemStack);
-            Object nmsStack = asNMSCopy.invoke(null, craftCopy);
-            Method tagField = nmsStack.getClass().getMethod("getTag");
-            return tagField.invoke(nmsStack);
-        } catch(Exception e) {
+            Object craftCopy = AS_CRAFT_COPY.invoke(null, itemStack);
+            Object nmsStack = AS_NMS_COPY.invoke(null, craftCopy);
+            return GET_COMPOUND_TAG.invoke(nmsStack);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
