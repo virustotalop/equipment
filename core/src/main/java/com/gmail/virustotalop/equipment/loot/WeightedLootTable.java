@@ -10,11 +10,13 @@ import java.util.Random;
 
 public class WeightedLootTable<T extends Loot> implements LootTable<T> {
 
+    public static final int DEFAULT_SCALE = 100;
+
     private final Map<Integer, Map.Entry<T, Integer>> table;
     private final int scale;
 
     public WeightedLootTable(@NotNull Map<T, Integer> table) {
-        this(table, 100);
+        this(table, DEFAULT_SCALE);
     }
 
     public WeightedLootTable(@NotNull Map<T, Integer> table, int scale) {
@@ -34,12 +36,13 @@ public class WeightedLootTable<T extends Loot> implements LootTable<T> {
 
     @Override
     public Collection<T> roll(int guaranteed) {
-        return this.roll(guaranteed, 0);
+        return this.roll(guaranteed, 0, true);
     }
 
-    private Collection<T> roll(int guaranteed, int generatedRolls) {
+    private Collection<T> roll(int guaranteed, int generatedRolls, boolean firstRoll) {
         Collection<T> loot = new ArrayList<>();
-        while (guaranteed < generatedRolls) {
+        while (generatedRolls < guaranteed || firstRoll) {
+            firstRoll = false;
             Random rand = new Random();
             T rolled = this.rollIndex(rand.nextInt(this.table.size()));
             if (rolled != null) {
