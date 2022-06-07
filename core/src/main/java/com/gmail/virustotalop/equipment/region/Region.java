@@ -21,7 +21,6 @@ public abstract class Region {
     /**
      * @return the name of the region
      */
-
     public @NotNull String getName() {
         return this.name;
     }
@@ -40,6 +39,12 @@ public abstract class Region {
         return Bukkit.getServer().getWorld(this.worldName);
     }
 
+    /**
+     * @param location Location to check if the key would debounce
+     * @return if the location is within the region
+     */
+    public abstract boolean isWithin(Location location);
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,11 +58,4 @@ public abstract class Region {
     public int hashCode() {
         return Objects.hash(this.name, this.worldName);
     }
-
-    /**
-     * @param location Location to check if the key would debounce
-     * @return if the location is within the region
-     */
-    public abstract boolean isWithin(Location location);
-
 }
