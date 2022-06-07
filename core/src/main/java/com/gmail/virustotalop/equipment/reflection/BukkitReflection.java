@@ -1,7 +1,7 @@
 package com.gmail.virustotalop.equipment.reflection;
 
-import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
+import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class BukkitReflection extends JavaReflection implements MinecraftReflection {
 
     private static final String BASE_PACKAGE = "net.minecraft";
+
     public static final String VERSION = version();
 
     private static String version() {
@@ -31,21 +32,21 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
     @Override
     public @Nullable Class<?> getNMSClass(@NotNull String nmsClassName, @NotNull String... optPackages) {
         StringBuilder nmsPackage = new StringBuilder();
-        for(int i = 0; i < optPackages.length; i++) {
+        for (int i = 0; i < optPackages.length; i++) {
             nmsPackage.append(optPackages[i]);
-            if(i != optPackages.length - 1) {
+            if (i != optPackages.length - 1) {
                 nmsPackage.append(".");
             }
         }
 
         String legacyClassName = BASE_PACKAGE + ".server." + VERSION + "." + nmsClassName;
         String modernClassName = BASE_PACKAGE;
-        if(nmsPackage.length() > 0) {
+        if (nmsPackage.length() > 0) {
             modernClassName += ".";
         }
         modernClassName += nmsPackage + "." + nmsClassName;
         Class<?> legacyClass = this.classCache.lookup(legacyClassName);
-        if(legacyClass == null) {
+        if (legacyClass == null) {
             return this.classCache.lookup(modernClassName);
         }
         return legacyClass;
@@ -54,11 +55,11 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
     @Override
     public @Nullable Class<?> getCraftClass(@NotNull String className, @NotNull String... optPackages) {
         StringBuilder craftClassName = new StringBuilder("org.bukkit.craftbukkit." + VERSION);
-        if(optPackages.length > 0) {
+        if (optPackages.length > 0) {
             craftClassName.append(".");
-            for(int i = 0; i < optPackages.length; i++) {
+            for (int i = 0; i < optPackages.length; i++) {
                 craftClassName.append(optPackages[i]);
-                if(i != optPackages.length - 1) {
+                if (i != optPackages.length - 1) {
                     craftClassName.append(".");
                 }
             }

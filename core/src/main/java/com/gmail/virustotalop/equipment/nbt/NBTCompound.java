@@ -60,24 +60,24 @@ public class NBTCompound {
     );
 
     public static boolean isCompound(@NotNull Object compound) {
-        if(compound == null) {
+        if (compound == null) {
             return false;
         }
         return compound.getClass().equals(COMPOUND_CLASS);
     }
 
     public static boolean fuzzyMatches(@NotNull NBTCompound compare, @NotNull NBTCompound compound) {
-        for(String key : compare.getKeys()) {
+        for (String key : compare.getKeys()) {
             Object get = compound.get(key);
-            if(get == null) {
+            if (get == null) {
                 return false;
-            } else if(isCompound(get)) {
+            } else if (isCompound(get)) {
                 Object compareCompound = compare.get(key);
-                if(!isCompound(compareCompound)) {
+                if (!isCompound(compareCompound)) {
                     return false;
                 }
                 return fuzzyMatches(new NBTCompound(compareCompound), new NBTCompound(get));
-            } else if(!compare.get(key).equals(compound.get(key))) {
+            } else if (!compare.get(key).equals(compound.get(key))) {
                 return false;
             }
         }

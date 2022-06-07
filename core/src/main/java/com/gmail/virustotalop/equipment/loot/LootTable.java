@@ -25,7 +25,7 @@ public class LootTable<T extends Loot> {
     private Map<Integer, Map.Entry<T, Integer>> loadLoot(Map<T, Integer> table) {
         Map<Integer, Map.Entry<T, Integer>> indexedMap = new HashMap<>();
         int index = 0;
-        for(Map.Entry<T, Integer> next : table.entrySet()) {
+        for (Map.Entry<T, Integer> next : table.entrySet()) {
             indexedMap.put(index, next);
             index += 1;
         }
@@ -42,10 +42,10 @@ public class LootTable<T extends Loot> {
 
     private Collection<T> roll(int guaranteed, int generatedRolls) {
         Collection<T> loot = new ArrayList<>();
-        while(guaranteed < generatedRolls) {
+        while (guaranteed < generatedRolls) {
             Random rand = new Random();
             T rolled = this.rollIndex(rand.nextInt(this.table.size()));
-            if(rolled != null) {
+            if (rolled != null) {
                 loot.add(rolled);
                 generatedRolls += 1;
             }
@@ -57,7 +57,7 @@ public class LootTable<T extends Loot> {
         Map.Entry<T, Integer> entry = this.table.get(index);
         Random rand = new Random();
         int next = rand.nextInt(this.getScale()) + 1;
-        if(next <= entry.getValue()) {
+        if (next <= entry.getValue()) {
             return entry.getKey();
         }
         return null;

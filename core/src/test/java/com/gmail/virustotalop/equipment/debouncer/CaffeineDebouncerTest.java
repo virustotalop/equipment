@@ -17,7 +17,7 @@ public class CaffeineDebouncerTest {
         assertFalse(debouncer.debounce(uuid));
         try {
             Thread.sleep(1050);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertFalse(debouncer.containsKey(uuid));

@@ -30,7 +30,7 @@ public class CaffeineDebouncer<K> implements Debouncer<K> {
 
     @Override
     public boolean debounce(@NotNull K key) {
-        if(this.containsKey(key)) {
+        if (this.containsKey(key)) {
             return true;
         }
         this.cache.put(key, Instant.now().toEpochMilli());

@@ -1,7 +1,7 @@
 package com.gmail.virustotalop.equipment.cache;
 
-import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
+import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;

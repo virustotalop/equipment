@@ -11,6 +11,7 @@ public interface Reflection {
     default @Nullable Method getMethodByReturnType(Class<?> searchIn, Class<?> returnType, boolean isStatic) {
         return this.getMethodByReturnType(searchIn, returnType, isStatic, EMPTY_CLASS_AR);
     }
+
     @Nullable Method getMethodByReturnType(Class<?> searchIn, Class<?> returnType,
                                            boolean isStatic, Class<?>... paramTypes);
 

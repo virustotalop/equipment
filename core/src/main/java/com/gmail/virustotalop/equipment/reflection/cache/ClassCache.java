@@ -15,16 +15,15 @@ public interface ClassCache {
         return this.lookup(null, classes);
     }
 
-
     default @Nullable Class<?> lookup(@NotNull ClassLoader classLoader, @NotNull String... classes) {
-        for(String clazzName : classes) {
+        for (String clazzName : classes) {
             Optional<Class<?>> clazzOpt = this.cache().get(clazzName);
-            if(clazzOpt != null && clazzOpt.isPresent()) {
+            if (clazzOpt != null && clazzOpt.isPresent()) {
                 return clazzOpt.get();
             }
             try {
                 Class<?> clazz;
-                if(classLoader == null) {
+                if (classLoader == null) {
                     clazz = Class.forName(clazzName);
                 } else {
                     clazz = Class.forName(clazzName, true, classLoader);
@@ -32,7 +31,7 @@ public interface ClassCache {
                 clazzOpt = Optional.of(clazz);
                 this.cache().put(clazzName, clazzOpt);
                 return clazz;
-            } catch(ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 this.cache().put(clazzName, Optional.empty());
             }
         }

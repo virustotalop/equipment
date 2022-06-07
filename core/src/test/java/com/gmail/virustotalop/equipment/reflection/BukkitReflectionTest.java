@@ -2,9 +2,9 @@ package com.gmail.virustotalop.equipment.reflection;
 
 import com.gmail.virustotalop.equipment.mock.MockFactory;
 import net.minecraft.TestNMSModern;
+import net.minecraft.server.v1_8_R3.TestNMSLegacy;
 import net.minecraft.test.PackagedNMSModern;
 import net.minecraft.test.child.ChildPackagedNMSModern;
-import net.minecraft.server.v1_8_R3.TestNMSLegacy;
 import org.bukkit.craftbukkit.v1_8_R3.TestCraft;
 import org.bukkit.craftbukkit.v1_8_R3.test.TestCraftPackaged;
 import org.bukkit.craftbukkit.v1_8_R3.test.child.ChildTestCraftPackaged;

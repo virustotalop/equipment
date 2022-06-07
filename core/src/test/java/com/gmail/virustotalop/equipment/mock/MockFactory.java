@@ -26,7 +26,7 @@ public class MockFactory {
             serverField.setAccessible(true);
             serverField.set(null, server);
             return (MockServer) Bukkit.getServer();
-        } catch(NoSuchFieldException | IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

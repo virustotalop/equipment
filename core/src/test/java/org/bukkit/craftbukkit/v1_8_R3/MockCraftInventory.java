@@ -38,7 +38,7 @@ public abstract class MockCraftInventory implements Inventory {
 
     @Override
     public void setItem(int index, ItemStack item) {
-        if(index < 0 || index >= this.getSize()) {
+        if (index < 0 || index >= this.getSize()) {
             return;
         }
         this.slots.put(index, item);
@@ -47,13 +47,13 @@ public abstract class MockCraftInventory implements Inventory {
     @Override
     public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException {
         HashMap<Integer, ItemStack> overflow = new HashMap<>();
-        for(ItemStack item : items) {
-            for(int i = 0; i < this.getSize(); i++) {
+        for (ItemStack item : items) {
+            for (int i = 0; i < this.getSize(); i++) {
                 ItemStack stack = this.slots.get(i);
-                if(stack == null) {
+                if (stack == null) {
                     this.slots.put(i, item);
                     break;
-                } else if(i == this.getSize() - 1) {
+                } else if (i == this.getSize() - 1) {
                     overflow.put(item.getAmount(), item);
                 }
             }
@@ -64,7 +64,7 @@ public abstract class MockCraftInventory implements Inventory {
     @Override
     public ItemStack[] getContents() {
         ItemStack[] contents = new ItemStack[this.getSize()];
-        for(int i = 0; i < this.getSize(); i++) {
+        for (int i = 0; i < this.getSize(); i++) {
             contents[i] = this.getItem(i);
         }
         return contents;

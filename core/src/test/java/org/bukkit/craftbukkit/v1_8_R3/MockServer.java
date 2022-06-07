@@ -33,7 +33,7 @@ public abstract class MockServer implements Server {
 
     @Override
     public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-       return this.commands.add(commandLine);
+        return this.commands.add(commandLine);
     }
 
     public List<String> getCommands() {

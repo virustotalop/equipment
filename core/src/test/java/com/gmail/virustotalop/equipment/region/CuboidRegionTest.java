@@ -1,8 +1,8 @@
 package com.gmail.virustotalop.equipment.region;
 
 import com.gmail.virustotalop.equipment.mock.MockFactory;
-import org.bukkit.craftbukkit.v1_8_R3.MockWorld;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.MockWorld;
 import org.junit.jupiter.api.Test;
 
 import static junit.framework.Assert.assertEquals;
