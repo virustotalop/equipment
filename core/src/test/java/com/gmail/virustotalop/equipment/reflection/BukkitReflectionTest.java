@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class MinecraftReflectionTest {
+public class BukkitReflectionTest {
 
     private MinecraftReflection reflect;
 
@@ -21,12 +21,12 @@ public class MinecraftReflectionTest {
     public void setup() {
         MockFactory factory = new MockFactory();
         factory.createServer();
-        this.reflect = new MinecraftReflection();
+        this.reflect = new BukkitReflection();
     }
 
     @Test
     public void testVersion() {
-        assertEquals("v1_8_R3", MinecraftReflection.VERSION);
+        assertEquals("v1_8_R3", BukkitReflection.VERSION);
     }
 
     @Test

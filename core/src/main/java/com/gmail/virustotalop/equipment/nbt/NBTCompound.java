@@ -1,5 +1,6 @@
 package com.gmail.virustotalop.equipment.nbt;
 
+import com.gmail.virustotalop.equipment.reflection.BukkitReflection;
 import com.gmail.virustotalop.equipment.reflection.MinecraftReflection;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 public class NBTCompound {
 
-    private static final MinecraftReflection REFLECT = new MinecraftReflection();
+    private static final MinecraftReflection REFLECT = new BukkitReflection();
     private static final Class<?> COMPOUND_CLASS = REFLECT.getNMSClass("NBTTagCompound", "nbt");
     private static final Class<?> PARSER_CLASS = REFLECT.getNMSClass("MojangsonParser", "nbt");
 
@@ -108,7 +109,7 @@ public class NBTCompound {
 
     private Object retrieveNBTCompoundFromItem(ItemStack itemStack) {
         try {
-            Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + MinecraftReflection.VERSION + ".inventory.CraftItemStack");
+            Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + BukkitReflection.VERSION + ".inventory.CraftItemStack");
             Method asCraftCopy = craftItemStack.getMethod("asCraftCopy", ItemStack.class);
             Method asNMSCopy = craftItemStack.getMethod("asNMSCopy", ItemStack.class);
             Object craftCopy = asCraftCopy.invoke(null, itemStack);
