@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BukkitReflection extends JavaReflection implements MinecraftReflection {
 
+    private static final String BASE_PACKAGE = "net.minecraft";
     public static final String VERSION = version();
 
     private static String version() {
@@ -36,9 +37,9 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
                 nmsPackage.append(".");
             }
         }
-        String basePackage = "net.minecraft";
-        String legacyClassName = basePackage + ".server." + VERSION + "." + nmsClassName;
-        String modernClassName = basePackage;
+
+        String legacyClassName = BASE_PACKAGE + ".server." + VERSION + "." + nmsClassName;
+        String modernClassName = BASE_PACKAGE;
         if(nmsPackage.length() > 0) {
             modernClassName += ".";
         }
