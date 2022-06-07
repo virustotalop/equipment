@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.TimeUnit;
 
-public final class MinecraftReflection {
+public class MinecraftReflection {
 
     private static final String[] EMPTY_ARR = new String[0];
     public static final String VERSION = version();
