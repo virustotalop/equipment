@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class InventoryLootTest {
 
@@ -17,7 +18,7 @@ public class InventoryLootTest {
         Inventory inventory = factory.mock(MockCraftInventory.class);
         ItemStack dirt = new ItemStack(Material.DIRT);
         Loot<Inventory> loot = new InventoryLoot(dirt);
-        loot.populate(inventory);
+        assertTrue(loot.populate(inventory));
         assertEquals(dirt, inventory.getContents()[0]);
     }
 }

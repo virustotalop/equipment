@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class CommandLootTest {
 
@@ -20,7 +22,7 @@ public class CommandLootTest {
         Player player = factory.mock(MockPlayer.class, playerName);
         String commandStr = "some command";
         Loot<Player> loot = new CommandLoot(commandStr);
-        loot.populate(player);
+        assertTrue(loot.populate(player));
         List<String> commands = server.getCommands();
         assertEquals(commandStr, commands.get(0));
     }
@@ -34,7 +36,7 @@ public class CommandLootTest {
         String commandStr = "some command %player%";
         String replacedStr = commandStr.replace("%player%", playerName);
         Loot<Player> loot = new CommandLoot(commandStr);
-        loot.populate(player);
+        assertTrue(loot.populate(player));
         List<String> commands = server.getCommands();
         assertEquals(replacedStr, commands.get(0));
     }
