@@ -1,12 +1,9 @@
 package com.gmail.virustotalop.equipment.reflection;
 
-import com.gmail.virustotalop.equipment.reflection.cache.CaffeineClassCache;
 import com.gmail.virustotalop.equipment.reflection.cache.ClassCache;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.concurrent.TimeUnit;
 
 public class BukkitReflection extends JavaReflection implements MinecraftReflection {
 
@@ -19,14 +16,12 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
         return packageName.substring(packageName.lastIndexOf('.') + 1);
     }
 
-    private final ClassCache classCache;
-
     public BukkitReflection() {
-        this(new CaffeineClassCache(5, TimeUnit.MINUTES));
+        super();
     }
 
     public BukkitReflection(@NotNull ClassCache classCache) {
-        this.classCache = classCache;
+        super(classCache);
     }
 
     @Override
@@ -38,16 +33,15 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
                 nmsPackage.append(".");
             }
         }
-
         String legacyClassName = BASE_PACKAGE + ".server." + VERSION + "." + nmsClassName;
         String modernClassName = BASE_PACKAGE;
         if (nmsPackage.length() > 0) {
             modernClassName += ".";
         }
         modernClassName += nmsPackage + "." + nmsClassName;
-        Class<?> legacyClass = this.classCache.lookup(legacyClassName);
+        Class<?> legacyClass = this.getClass(legacyClassName);
         if (legacyClass == null) {
-            return this.classCache.lookup(modernClassName);
+            return this.getClass(modernClassName);
         }
         return legacyClass;
     }
@@ -65,6 +59,6 @@ public class BukkitReflection extends JavaReflection implements MinecraftReflect
             }
         }
         craftClassName.append(".").append(className);
-        return this.classCache.lookup(craftClassName.toString());
+        return this.getClass(craftClassName.toString());
     }
 }
