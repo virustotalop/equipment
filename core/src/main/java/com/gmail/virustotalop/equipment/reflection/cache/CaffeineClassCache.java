@@ -16,7 +16,7 @@ public class CaffeineClassCache implements ClassCache {
         this(cacheTimeout, timeUnit, Long.MAX_VALUE);
     }
 
-    public CaffeineClassCache(int cacheTimeout, TimeUnit timeUnit, Long maxCacheSize) {
+    public CaffeineClassCache(int cacheTimeout, TimeUnit timeUnit, long maxCacheSize) {
         this.cache = Caffeine.newBuilder()
                 .maximumSize(maxCacheSize)
                 .expireAfterWrite(cacheTimeout, timeUnit)
