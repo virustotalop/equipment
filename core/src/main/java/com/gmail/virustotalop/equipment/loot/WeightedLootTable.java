@@ -36,11 +36,12 @@ public class WeightedLootTable<T extends Loot> implements LootTable<T> {
 
     @Override
     public Collection<T> roll(int guaranteed) {
-        return this.roll(guaranteed, 0, true);
+        return this.roll(guaranteed, 0);
     }
 
-    private Collection<T> roll(int guaranteed, int generatedRolls, boolean firstRoll) {
+    private Collection<T> roll(int guaranteed, int generatedRolls) {
         Collection<T> loot = new ArrayList<>();
+        boolean firstRoll = true; //For the roll() method there is no guaranteed rolls, but we want to roll once
         while (generatedRolls < guaranteed || firstRoll) {
             firstRoll = false;
             Random rand = new Random();
