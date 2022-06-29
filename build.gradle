@@ -10,6 +10,7 @@ def projectVersion = '0.1.0'
 
 subprojects {
     apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
 
     group projectGroup
     version projectVersion
