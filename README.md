@@ -6,6 +6,7 @@
 A collection of common data structures, utilities and more to make Minecraft development with Bukkit easier.
 </div>
 
+[![](https://jitpack.io/v/virustotalop/equipment.svg)](https://jitpack.io/#virustotalop/equipment)
 
 
 ## Modules
