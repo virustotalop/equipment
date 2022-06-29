@@ -2,17 +2,31 @@ plugins {
     id 'java-library'
     id 'eclipse'
     id 'idea'
+    id 'maven-publish'
 }
+
+def projectGroup = 'com.gmail.virustotalop'
+def projectVersion = '0.1.0'
 
 subprojects {
     apply plugin: 'java-library'
 
-    group 'com.gmail.virustotalop'
-    version '1.0.0-SNAPSHOT'
+    group projectGroup
+    version projectVersion
 
     tasks.withType(JavaCompile) {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId projectGroup
+                artifactId project.name
+                version projectVersion
+            }
+        }
     }
 
     repositories {
